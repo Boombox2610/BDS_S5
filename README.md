@@ -12,7 +12,7 @@ Contents:
       - Singly Linked List
       - Stacks using LL
       - Queues using LL
-      - Doubly LL (REMAINING)
+      - Doubly LL
   - Searching
       - Sequential Search
       - Binary Search
