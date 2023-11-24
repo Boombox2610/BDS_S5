@@ -33,7 +33,16 @@ class LinkedList{
                 head = newNode;
             }
         }
-        
+        void createList(int n){
+            //creates 'n' number of nodes
+            for(int i = 0; i < n; i++){ // runs a loop that will add 'n' number of nodes
+                int inp;
+                cout<<"\nEnter a number to be put on index "<<i<<": ";
+                cin>>inp;
+                //calling insert function mentioned above
+                insert(inp);
+            }
+        }
         int length(){
             Node *temp = head;
             int count = 0;
@@ -41,7 +50,10 @@ class LinkedList{
                 temp = temp->next;
                 count++;
             }
-            delete temp;
+            //delete temp;
+            //delete temp not necessary as one should use delete only when memory was alocated with 'new' 
+            //here, temp is only used as a pointer for traversal, and not alocated with 'new'
+            //deleting temp is essentially trying to delete a null pointer, which is undefined behaviour in C++
             return count;
         }
         void insertAtNthPosition(int val, int n = 1){
