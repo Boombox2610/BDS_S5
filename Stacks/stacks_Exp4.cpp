@@ -1,9 +1,16 @@
 #include <iostream>
 using namespace std;
-
+//or use #define maxsize 10
+//this defines maxsize as a macro
+//the preprocessor replaces all occurrences of maxsize with the literal value 5 before the compilation process. It's a simple text replacement.
 const int maxsize = 5;
+//When using const int, maxsize is treated as a constant variable with a fixed value. The compiler reserves memory for maxsize and ensures that its value remains constant throughout the program
+//Macros lack type checking and can lead to unexpected behavior since they are simple text substitutions.
+//Constants declared with const int have a specific type, can be used in a type-safe manner, and offer better debugging capabilities.
+//Macros are processed by the preprocessor, while const int involves the compiler's type-checking mechanisms.
+//Using const int is generally considered safer and more modern in C++ programming.
 int top = -1;
-int stack[5];
+int stack[maxsize];
 
 bool isFull() {
     return top == maxsize - 1;
