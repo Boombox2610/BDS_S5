@@ -1,57 +1,79 @@
 #include <iostream>
 using namespace std;
-class Queue{
-    int rear, front;
-    int size;
-    int *Q;
-    public:
-    Queue(int s){
-        front = rear = -1;
-        size = s;
-        Q = new int[s];
-    }
-    void enqueue(int val);
-    void dequeue();
-    void display();
-};
-void Queue::enqueue(int val){
-    if(front == -1){
-        front = rear = 0;
-    }
-    if(rear == size - 1){
-        cout<<"\nQueue Full\n";
-        return;
-    }
-    Q[rear] = val;
-    rear++;
-    cout<<"\nInserted "<<val;
+const int maxsize = 100;
+
+int Queue[maxsize];
+int front = -1, rear = -1;
+
+bool isFull(){
+    return(rear == maxsize-1);
 }
-void Queue::dequeue(){
-    if(front == -1 || front > rear){
-        cout<<"\nUnderflow";
-        return;
-    }
-    cout<<endl<<Q[front]<<" removed.";
-    front++;
+bool isEmpty(){
+    return(front>rear || front==-1);
 }
-void Queue::display(){
-    if(front == -1){
-        cout<<"\nUnderflow";
-        return;
+
+void insert(int val){
+    if(!isFull()){
+        if(isEmpty()){
+            front = rear = 0;
+        }
+        else{
+            rear++;
+        }
+        Queue[rear] = val;
+        cout<<endl<<Queue[rear]<<" added.";
     }
-    cout<<endl<<"Elements are: ";
-    for(int i = front; i < rear; i++){
-        cout<<Q[i]<<" ";
+    else{
+        cout<<"\nQueue is Full";
     }
 }
-int main(){
-    Queue q(10);
-    q.enqueue(5);
-    q.enqueue(10);
-    q.enqueue(15);
-    q.enqueue(20);
-    q.display();
-    q.dequeue();
-    q.display();
+void remove(){
+    if(!isEmpty()){
+        cout<<"\n"<<front<<" removed.";
+        front++;
+        if(front > rear){
+            front = rear = 0;
+        }
+    }
+    else{
+        cout<<"\nQueue is Empty.";
+    }
+}
+void display(){
+    if(!isEmpty()){
+        cout<<"\nQueue: ";
+        for(int i = front; i <= rear; i++){
+            cout<<" "<<Queue[i];
+        }
+    }
+}
+
+int main() {
+    int choice, value;
+
+    do {
+        cout << "\nMenu:\n1. Insert\n2. Remove\n3. Display\n0. Exit\nEnter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter value to insert: ";
+                cin >> value;
+                insert(value);
+                break;
+            case 2:
+                remove();
+                break;
+            case 3:
+                display();
+                break;
+            case 0:
+                cout << "Exiting program. Goodbye!" << endl;
+                break;
+            default:
+                cout << "Invalid choice. Please try again." << endl;
+        }
+    } while (choice != 0);
+
     return 0;
 }
