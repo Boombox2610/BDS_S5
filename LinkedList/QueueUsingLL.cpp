@@ -1,87 +1,98 @@
 #include <iostream>
-#include <string>
 using namespace std;
-struct Node{
+
+// Node structure to represent a node in the queue
+struct Node {
     int value;
-    Node *next;
-    Node(int val): value(val), next(NULL){};
+    Node* next;
+
+    // Constructor to initialize a node with a given value
+    Node(int val) : value(val), next(NULL) {}
 };
-struct Queue{
-    Node *front;
-    Node *rear;
-    Queue(){
-        front = rear = NULL;
-    }
-    void enqueue(int val){
-        Node *newNode = new Node(val);
-        if(front==NULL){
+
+class Queue {
+private:
+    Node *front; // Pointer to the front of the queue
+    Node *rear;  // Pointer to the rear of the queue
+
+public:
+    // Constructor to initialize an empty queue
+    Queue() : front(NULL), rear(NULL) {}
+
+    // Function to enqueue a value into the queue
+    void enqueue(int val) {
+        Node* newNode = new Node(val);
+        if (front == NULL) {
             front = rear = newNode;
-        }
-        else{
+        } else {
             rear->next = newNode;
             rear = newNode;
         }
-    cout<<"\nEnqueued "<<newNode->value<<endl;
+        cout << "\nEnqueued " << newNode->value << endl;
     }
-    int dequeue(){
-        if(front == NULL){
-            cout<<"\nEmpty\n";
+
+    // Function to dequeue a value from the queue
+    int dequeue() {
+        if (front == NULL) {
+            cout << "\nEmpty\n";
             return -1;
         }
-        Node *temp = front;
-        int dQ = temp->value;
+        Node* temp = front;
+        int dequeuedValue = temp->value;
         front = temp->next;
         delete temp;
-        return dQ;
+        return dequeuedValue;
     }
-    void display(){
-        if(front == NULL){
-            cout<<"\nEmpty\n";
+
+    // Function to display the contents of the queue
+    void display() {
+        if (front == NULL) {
+            cout << "\nEmpty\n";
             return;
         }
-        Node *temp = front;
-        cout<<"\nElements are: ";
-        while(temp!= NULL){
-            cout<<temp->value<<" ";
+        Node* temp = front;
+        cout << "\nElements are: ";
+        while (temp != NULL) {
+            cout << temp->value << " ";
             temp = temp->next;
         }
-        cout<<endl;
+        cout << endl;
     }
 };
 
 int main() {
-  Queue queue;
-  char choice;
+    Queue queue;
+    char choice;
 
-  do {
-    std::cout << "Menu:\n1. Enqueue\n2. Dequeue\n3. Display\n4. Quit\nEnter your choice: ";
-    std::cin >> choice;
+    do {
+        cout << "Menu:\n1. Enqueue\n2. Dequeue\n3. Display\n4. Quit\nEnter your choice: ";
+        cin >> choice;
 
-    switch (choice) {
-      case '1': {
-        int value;
-        std::cout << "Enter a value to enqueue: ";
-        std::cin >> value;
-        queue.enqueue(value);
-        break;
-      }
-      case '2': {
-        int dequeuedValue = queue.dequeue();
-        if (dequeuedValue != -1) {
-          std::cout << "Dequeued: " << dequeuedValue << std::endl;
+        switch (choice) {
+            case '1': {
+                int value;
+                cout << "Enter a value to enqueue: ";
+                cin >> value;
+                queue.enqueue(value);
+                break;
+            }
+            case '2': {
+                int dequeuedValue = queue.dequeue();
+                if (dequeuedValue != -1) {
+                    cout << "Dequeued: " << dequeuedValue << endl;
+                }
+                break;
+            }
+            case '3':
+                queue.display();
+                break;
+            case '4':
+                cout << "Quitting the program." << endl;
+                break;
+            default:
+                cout << "Invalid choice. Please try again." << endl;
         }
-        break;
-      }
-      case '3':
-        queue.display();
-        break;
-      case '4':
-        std::cout << "Quitting the program." << std::endl;
-        break;
-      default:
-        std::cout << "Invalid choice. Please try again." << std::endl;
-    }
-  } while (choice != '4');
+    } while (choice != '4');
 
-  return 0;
+    return 0;
 }
