@@ -55,27 +55,43 @@ int sizeOfStack() {
 }
 
 int main() {
-    int i;
-    cout << "\nEnter " << maxsize << " elements: ";
-    for (i = 0; i < maxsize; i++) {
-        int k;
-        k = 0;
-        cout << "\nValue of element " << i + 1 << ": ";
-        cin >> k;
-        push(k);
-    }
+    int choice, value;
 
-    for (i = 0; i <= top; i++) {
-        cout << stack[i] << " ";
-    }
-    cout << endl;
-    cout<<peek(); //added a peek function
-    cout<<sizeOfStack();
-    while (!isEmpty()) {
-        int data = pop();
-        cout << data << " ";
-    }
-    cout << endl;
+    do {
+        cout << "\nMenu:\n1. Push\n2. Pop\n3. Peek\n4. Size of Stack\n5. Display Stack\n0. Exit\nEnter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter value to push: ";
+                cin >> value;
+                push(value);
+                break;
+            case 2:
+                value = pop();
+                if (value != -1) {
+                    cout << "Popped: " << value << endl;
+                }
+                break;
+            case 3:
+                value = peek();
+                if (value != -1) {
+                    cout << "Top of the stack: " << value << endl;
+                }
+                break;
+            case 4:
+                cout << "Size of the stack: " << sizeOfStack() << endl;
+                break;
+            case 5:
+                displayStack();
+                break;
+            case 0:
+                cout << "Exiting program. Goodbye!" << endl;
+                break;
+            default:
+                cout << "Invalid choice. Please try again." << endl;
+        }
+    } while (choice != 0);
 
     return 0;
 }
