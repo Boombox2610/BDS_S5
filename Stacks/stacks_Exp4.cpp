@@ -50,6 +50,10 @@ int peek() {
     }
 }
 
+int sizeOfStack() {
+    return top + 1;
+}
+
 int main() {
     int i;
     cout << "\nEnter " << maxsize << " elements: ";
@@ -65,7 +69,8 @@ int main() {
         cout << stack[i] << " ";
     }
     cout << endl;
-    peek(); //added a peek function
+    cout<<peek(); //added a peek function
+    cout<<sizeOfStack();
     while (!isEmpty()) {
         int data = pop();
         cout << data << " ";
