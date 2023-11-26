@@ -41,6 +41,15 @@ int pop() {
     }
 }
 
+int peek() {
+    if (!isEmpty()) {
+        return stack[top];
+    } else {
+        cout << "\nStack is Empty";
+        return -1;
+    }
+}
+
 int main() {
     int i;
     cout << "\nEnter " << maxsize << " elements: ";
@@ -56,7 +65,7 @@ int main() {
         cout << stack[i] << " ";
     }
     cout << endl;
-
+    peek(); //added a peek function
     while (!isEmpty()) {
         int data = pop();
         cout << data << " ";
