@@ -1,6 +1,6 @@
 # BDS_S5
 Basic Data Structures in C++
-Learnt in Semester 5, Y3.
+Learnt in Semester 5, Y3 && Semester 7, Y4
 Contents:
   - Stacks
   - Queues
@@ -21,3 +21,8 @@ Contents:
       - Selection Sort
       - Insertion Sort
       - Radix Sort(REMAINING)
+   
+##NEW
+  - Binary Tree
+      - Binary Search Tree
+      - 
