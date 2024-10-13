@@ -44,8 +44,13 @@
 6. Traverse temp until temp->next->val == VAL or temp->next != NULL
 7. If temp->next == NULL, terminate.
 8. Otherwise, Initialize temp2. temp2 = temp->next
-
-
-9. 
 10. Set temp->next = temp->next->next
 11. Delete temp2
+
+# Traverse
+1. If head == NULL, terminate. List is empty
+2. Initialize temporary variable temp pointing to head
+3. Traverse till temp != NULL
+4. Print temp->val. Set temp = temp -> next
+
+
