@@ -9,7 +9,7 @@ Contents:
       - Priority Queue
       - Circular Queue
   - Linked Lists
-      - Singly Linked List
+      - Singly Linked List + ALGORITHM
       - Stacks using LL
       - Queues using LL
       - Doubly LL
