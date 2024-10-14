@@ -16,14 +16,8 @@ class LinkedList{
     LinkedList(): head(NULL){};
     void insertAtStart(int val){
         Node *newNode = new Node(val);
-        if(head == NULL){
-            head = newNode;
-            return;
-        }
-        else{
-            newNode->next = head;
-            head = newNode;
-        }
+        newNode->next = head;
+        head = newNode;
     }
     void insertAtEnd(int val){
         Node* newNode = new Node(val);
