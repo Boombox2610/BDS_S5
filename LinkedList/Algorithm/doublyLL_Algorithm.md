@@ -47,7 +47,7 @@
 2. If head->next = NULL, list has only 1 element. Delete head, head = NULL, terminate
 3. Otherwise, store head in temporary node variable temp = head.
 4. Traverse till end of list. while temp->next != NULL, temp = temp->next
-5. Set temp->prev = NULL | delete temp
+5. Set temp->prev->next = NULL | delete temp
 
 # Delete By Val
 1. Input: value val to be deleted
