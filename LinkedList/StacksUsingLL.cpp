@@ -43,6 +43,7 @@ public:
     void display() {
         if (top == NULL) {
             cout << "\nMT\n"; // MT stands for "Empty" (Empty stack)
+            return;
         }
         Node* temp = top;
         while (temp != NULL) {
@@ -50,6 +51,13 @@ public:
             temp = temp->next;
         }
         cout << endl;
+        return;
+    }
+    int peek(){
+        if (top == NULL){
+            cout<<"\nEmpty"; return;
+        }
+        return top->value;
     }
 };
 
