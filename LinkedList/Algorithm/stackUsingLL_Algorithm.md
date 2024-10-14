@@ -19,3 +19,8 @@
 # Peek (print top)
 1. If top == NULL, stack is empty. Terminate
 2. Otherwise, return top->value
+
+# Display
+1. If top == NULL, stack is empty. Terminate
+2. Otherwise, create temporary node temp = top.
+3. Iterate till end of stack. While temp != NULL, print temp->value | temp = temp->next
