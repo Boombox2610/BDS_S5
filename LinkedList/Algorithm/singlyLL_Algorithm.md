@@ -1,8 +1,7 @@
 # Insert At Start
 1. Take input of value val from user
 2. Create new node NewNode with value val and next pointer to NULL
-3. If head of linked list is NULL, set head = newNode
-4. Otherwise, set newNode->next = head, set head = newNode
+3. Set newNode->next = head, set head = newNode
 
 # Insert At End
 1. Take input of value from user
