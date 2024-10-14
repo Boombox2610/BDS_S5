@@ -37,9 +37,43 @@
 
 # Delete At Start
 1. If head == NULL, list is empty. Terminate
-2. 
+2. Otherwise, Store head in temporary node variable temp = head | Set head = temp->next
+3. If new head == NULL, list was of one element, now empty. Terminate (Prevent null pointer dereference)
+4. Otherwise, head->prev = NULL.
+5. Delete temp
 
+# Delete At End
+1. If head = NULL, list is empty. Terminate
+2. If head->next = NULL, list has only 1 element. Delete head, head = NULL, terminate
+3. Otherwise, store head in temporary node variable temp = head.
+4. Traverse till end of list. while temp->next != NULL, temp = temp->next
+5. Set temp->prev = NULL | delete temp
 
+# Delete By Val
+1. Input: value val to be deleted
+2. If head = NULL, list is empty, terminate
+3. If head->value = val, delete at start.
+4. temp = head | head = temp->next | if head != NULL then head->prev = NULL | delete temp
+5. Otherwise, iterate through whole list from start to value.
+6. Create temporary node temp pointing to head. while temp->value != val && temp != NULL, temp = temp->next
+7. If temp == NULL, terminate. Value not found
+8. Otherwise, temp->prev->next = temp->next
+9. If temp->next != NULL, temp->next->prev = temp->prev (prevent null pointer deref)
+10. Delete temp
+
+# Display
+1. If head = NULL, list is empty. Terminate
+2. Traverse whole list till end. Create temporary node temp = head
+3. While temp != NULL, print temp->value \ temp = temp->next
+4. Delete temp
+
+# Display Reverse
+1. If head = NULL, list is empty. Terminate
+2. Traverse whole list till end. Create temporary node temp = head
+3. while temp->next != NULL, temp = temp->next
+4. Once reached at end, print values from end to start
+5. While temp != NULL, print temp->val | temp = temp->prev
+6. Delete temp
 
 
 
