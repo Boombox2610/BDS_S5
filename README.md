@@ -27,4 +27,4 @@ Contents:
       - Binary Search Tree
   - Graphs
       - Adjacency List + Adjacency Matrix
-      - BDS + DFS
+      - BFS + DFS
