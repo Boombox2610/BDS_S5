@@ -1,79 +1,110 @@
 #include <iostream>
 using namespace std;
-const int maxsize = 100;
 
-int Queue[maxsize];
-int front = -1, rear = -1;
+class Queue {
+private:
+    int front, rear;
+    int size;
+    int *Q;
 
-bool isFull(){
-    return(rear == maxsize-1);
-}
-bool isEmpty(){
-    return(front>rear || front==-1);
-}
+public:
+    Queue(int s) : front(-1), rear(-1), size(s) {
+        Q = new int[size];
+    }
 
-void insert(int val){
-    if(!isFull()){
-        if(isEmpty()){
-            front = rear = 0;
+    ~Queue() {
+        delete[] Q;
+    }
+
+    bool isFull() const {
+        return (front == 0 && rear == size - 1) || (front == rear + 1);
+    }
+
+    bool isEmpty() const {
+        return front == -1;
+    }
+
+    void enqueue(int val) {
+        if (isFull()) {
+            cout << "\nOVERFLOW";
+            return;
         }
-        else{
+        if (isEmpty()) {
+            front = rear = 0;
+        } else if (rear == size - 1) {
+            rear = 0;
+        } else {
             rear++;
         }
-        Queue[rear] = val;
-        cout<<endl<<Queue[rear]<<" added.";
+        Q[rear] = val;
     }
-    else{
-        cout<<"\nQueue is Full";
-    }
-}
-void remove(){
-    if(!isEmpty()){
-        cout<<"\n"<<front<<" removed.";
-        front++;
-        if(front > rear){
-            front = rear = 0;
+
+    void dequeue() {
+        if (isEmpty()) {
+            cout << "\nUNDERFLOW";
+            return;
+        }
+        cout << "\n" << Q[front] << " removed.";
+        if (front == rear) {
+            front = rear = -1;
+        } else if (front == size - 1) {
+            front = 0;
+        } else {
+            front++;
         }
     }
-    else{
-        cout<<"\nQueue is Empty.";
-    }
-}
-void display(){
-    if(!isEmpty()){
-        cout<<"\nQueue: ";
-        for(int i = front; i <= rear; i++){
-            cout<<" "<<Queue[i];
+
+    void display() const {
+        if (isEmpty()) {
+            cout << "\nEmpty";
+            return;
+        }
+        if (rear < front) {
+            for (int i = front; i < size; i++) {
+                cout << Q[i] << " ";
+            }
+            for (int i = 0; i <= rear; i++) {
+                cout << Q[i] << " ";
+            }
+        } else {
+            for (int i = front; i <= rear; i++) {
+                cout << Q[i] << " ";
+            }
         }
     }
-}
+};
 
 int main() {
-    int choice, value;
+    int size, choice, value;
+    cout << "Enter the size of the queue: ";
+    cin >> size;
+    Queue q(size);
 
-    do {
-        cout << "\nMenu:\n1. Insert\n2. Remove\n3. Display\n0. Exit\nEnter your choice: ";
+    while (true) {
+        cout << "\n\nQueue Operations Menu:";
+        cout << "\n1. Enqueue";
+        cout << "\n2. Dequeue";
+        cout << "\n3. Display";
+        cout << "\n4. Exit";
+        cout << "\nEnter your choice: ";
         cin >> choice;
 
         switch (choice) {
             case 1:
-                cout << "Enter value to insert: ";
+                cout << "Enter value to enqueue: ";
                 cin >> value;
-                insert(value);
+                q.enqueue(value);
                 break;
             case 2:
-                remove();
+                q.dequeue();
                 break;
             case 3:
-                display();
+                q.display();
                 break;
-            case 0:
-                cout << "Exiting program. Goodbye!" << endl;
-                break;
+            case 4:
+                return 0;
             default:
-                cout << "Invalid choice. Please try again." << endl;
+                cout << "Invalid choice, please try again.";
         }
-    } while (choice != 0);
-
-    return 0;
+    }
 }
