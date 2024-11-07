@@ -1,70 +1,102 @@
 #include <iostream>
-#include <cstring>
+#include <string>
+
 using namespace std;
 
-const int maxsize = 100;
-int top = -1;
-char stack[maxsize];
+class myStack {
+private:
+    int maxSize;
+    int mySize;
+    int top;
+    char *stackArr;
 
-bool isFull() {
-    return top == maxsize - 1;
-}
-
-bool isEmpty() {
-    return top == -1;
-}
-
-void push(char var) {
-    if (!isFull()) {
-        top++;
-        stack[top] = var;
-    } else {
-        cout << "Stack is full." << endl;
+public:
+    myStack(int maxS, int mSize) : maxSize(maxS), mySize(mSize), top(-1) {
+        stackArr = new char[mySize];
     }
-}
 
-char pop() {
-    char data;
-    if (!isEmpty()) {
-        data = stack[top];
-        top = top - 1;
-        return data;
-    } else {
-        cout << "Could not retrieve data, Stack is empty." << endl;
-        return -1;
+    myStack() : maxSize(50), mySize(10), top(-1) {
+        stackArr = new char[mySize];
     }
-}
 
-bool balance(char stringInput[]) {
-    for (int i = 0; i < strlen(stringInput); i++) {
-        char element = stringInput[i];
-        if (element == '(' || element == '{' || element == '[') {
-            push(element);
-        } else if (element == ')' || element == '}' || element == ']') {
-            if (top < 0) {
-                return false;
-            }
-            char poppedVal = pop();
-            if ((element == ')' && poppedVal != '(') || (element == '}' && poppedVal != '{') ||
-                (element == ']' && poppedVal != '[')) {
-                return false;
-            }
+    ~myStack() {
+        delete[] stackArr;
+    }
+
+    bool isEmpty() const {
+        return (top == -1);
+    }
+
+    bool isFull() const {
+        return (top >= mySize - 1);
+    }
+
+    void push(char bracket) {
+        if (isFull()) {
+            cout << "\nSTACK OVERFLOW\n";
+            return;
         }
+        stackArr[++top] = bracket;
     }
-    return top == -1;
-}
+
+    void pop() {
+        if (isEmpty()) {
+            cout << "\nStack Empty\n";
+            return;
+        }
+        top--;
+    }
+
+    char peek() const {
+        if (isEmpty()) {
+            cout << "\nStack Empty\n";
+            return '\0';
+        }
+        return stackArr[top];
+    }
+
+    void printAll() const {
+        if (isEmpty()) {
+            cout << "\nStack Empty\n";
+            return;
+        }
+        cout << "\nElements: ";
+        for (int i = 0; i <= top; i++) {
+            cout << stackArr[i] << " ";
+        }
+        cout << endl;
+    }
+};
 
 int main() {
-    char charArray[maxsize];
-    cout << "\nEnter string of max size " << maxsize << ": ";
-    cin >> charArray;
-    cout << endl;
-
-    if (balance(charArray)) {
-        cout << "Expression is Balanced." << endl;
-    } else {
-        cout << "Expression is NOT Balanced." << endl;
+    string inp1;
+    cout << "\nEnter a string literal: \n";
+    cin >> inp1;
+    int len = inp1.length();
+    myStack stack1(len, len);
+    for (int i = 0; i < len; i++) {
+        cout << inp1[i] << " ";
+        if (inp1[i] == '(' || inp1[i] == '[' || inp1[i] == '{') {
+            stack1.push(inp1[i]);
+            cout << " push\n";
+        } else if ((inp1[i] == ')' && stack1.peek() == '(') ||
+                   (inp1[i] == ']' && stack1.peek() == '[') ||
+                   (inp1[i] == '}' && stack1.peek() == '{')) {
+            cout << " pop\n";
+            stack1.pop();
+        } else if ((inp1[i] == ')' && stack1.peek() != '(') ||
+                   (inp1[i] == ']' && stack1.peek() != '[') ||
+                   (inp1[i] == '}' && stack1.peek() != '{')) {
+            cout << "\nUnbalanced\n";
+            return 0;
+        } else {
+            continue;
+        }
     }
-
+    if (!stack1.isEmpty()) {
+        cout << "\nUnbalanced\n";
+    } else {
+        cout << "\nBalanced\n";
+    }
     return 0;
 }
